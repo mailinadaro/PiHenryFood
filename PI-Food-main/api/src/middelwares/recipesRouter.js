@@ -1,4 +1,5 @@
 const {Router} = require('express');
+
 const {Recipe, Diet} = require('../db.js');
 const axios = require('axios');
 const { getAllRecipes } = require('../controllers/getRecipes.js');
@@ -8,6 +9,8 @@ const {API_KEY} = process.env;
 
 
 const recipesRouter = Router();
+
+
 
 ////////// FUNCIONA //////////////////  
 ////////////// GET /recipes?name="...": ////////////////
@@ -69,43 +72,19 @@ recipesRouter.get('/', async (req, res) => {
 });   
 
 
-/* recipesRouter.get('/:id', async (req, res) => {
-    try{
-        const {id} = req.params;
-        if(id){
-            const recipeById = await getRecipeById(id);
-            if(recipeById){
-                res.status(200).send(recipeById);
-            } else {
-                res.status(404).send({message : 'No recipe found'});
-            }
-        }
-    } catch (error) {
-        res.status(400).send({error : error.message});
-    }
-});
-
- */
-
-
-
-
-///////////// FUNCIONA //////////////
-/// ojo que no relaciona las dietas !!!
-
 ///////////// POST /recipes: //////////////////////
 //Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 //Crea una receta en la base de datos relacionada con sus tipos de dietas.
 recipesRouter.post('/', async (req, res) => {
     try{
-        const {name, summary, healthScore, steps, createdInDB, diets} = req.body // traigo los datos que me envian desde el front
+        const {name, summary, healthScore, steps, image, createdInDB, diets} = req.body // traigo los datos que me envian desde el front
         
         //compruebo si tengo los datos necesarios para crear la receta
         if(!name || !summary || name.length < 3 || summary.length < 3){
             res.status(400).send({error : 'Name and summary are required'});
         }
 
-        const newRecipe = await addNewRecipe(name, summary, healthScore, steps, createdInDB, diets);
+        const newRecipe = await addNewRecipe(name, summary, healthScore, steps, image, createdInDB, diets);
         res.status(200).json(newRecipe);
 
     }catch(error){

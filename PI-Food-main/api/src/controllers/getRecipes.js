@@ -30,12 +30,11 @@ const getRecipesApi = async ()=> {
 const getRecipesDb = async () => {
     try {
         const recipesDb = await Recipe.findAll({ //traigo todas las recetas de la base de datos
+            
             include: {                            //incluyo los tipos de dietas de cada receta
                 model: Diet,            
                 attributes: ['name'],             
-                through: {                      
-                    attributes: []            //no incluyo los atributos de la tabla intermedia
-                }
+                through: {attributes: []} //no necesito los atributos de la tabla intermedia
             }
         });
         return recipesDb; // devuelve las recetas de la base de datos

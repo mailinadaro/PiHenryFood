@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react'
-import {getRecipe} from '../actions/index.js'
+import {getRecipe} from '../../redux/actions/index.js'
 import {useParams} from 'react-router-dom'
 import {Link} from 'react-router-dom'
 

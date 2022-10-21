@@ -2,40 +2,33 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from 'react'
 import {getRecipe} from '../../redux/actions/index.js'
-import {useParams} from 'react-router-dom'
-import {Link} from 'react-router-dom'
 
 
-export default function RecipesDetail() {
+
+
+export default function RecipesDetail(props){
+
     const dispatch = useDispatch()
-    const {id} = useParams()
-    const recipe = useSelector((state) => state.recipe)
+    const id = props.match.params.id
+    const recipe = useSelector((state) => state.recipe) 
+   console.log(recipe)
     
-
+    
     useEffect(() => {
         dispatch(getRecipe(id))
-    }, [dispatch, id])
+    }, [ dispatch, id ])
 
     return (
         <div>
-            {recipe.length > 0 ? (
-                <div>
-                    <h1>{recipe[0].name}</h1>
-                    <h2>Summary</h2>
-                    <p>{recipe[0].summary}</p>
-                    <h2>Score</h2>
-                    <p>{recipe[0].healthScore}</p>
-                    <h2>Steps</h2>
-                    <p>{recipe[0].steps}</p>
-                    <h2>Diets</h2>
-                    <p>{recipe[0].diets.map((diet) => diet.name).join(', ')}</p>
-                </div>
-           ) : (
-            <h1>Loading...</h1>
-            )}
-
-            <Link to='/home'> Back to Home </Link>
-
+    
+            <div>
+                <h1>{recipe.name}</h1>
+                <p>{recipe.summary}</p>
+                <p>{recipe.healthScore}</p>
+                {recipe.image? <img src={recipe.image} alt={recipe.name}/> : null}
+             {/*    <p>{recipe.steps.map((step)=> step)}</p>   */}
+                {/* <p>{recipe.diets.map(diet => diet.name)}</p> */}
+            </div>
         </div>
     )
 }

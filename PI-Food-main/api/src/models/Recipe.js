@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Recipe', {
+  sequelize.define('recipe', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       //defaultValue: 0,
       validate : {
-        isNumeric: true,
+        isInt: true,
         min : 0, // para que el health score no pueda ser menor 
         max : 100, // el health score no pueda exceder de este valor
         notEmpty : true 
@@ -51,6 +51,9 @@ module.exports = (sequelize) => {
         notEmpty: true,
     },
   },
+ /*  image : {
+    type: DataTypes.STRING, 
+  }, */
   createdInDB : {
     type: DataTypes.BOOLEAN,
     allowNull : false,

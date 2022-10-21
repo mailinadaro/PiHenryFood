@@ -1,39 +1,29 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
-
+import {useHistory } from 'react-router-dom';
 import {createRecipes} from '../../redux/actions';
 import {getDiets} from '../../redux/actions/index.js';
 
-import {Link} from 'react-router-dom';
+
 
  ////////// FUNCION DE VALIDACION DE CAMPOS //////////
-    //Para realizar la validacion, crearemos un objeto con los campos que queremos validar y sus respectivos valores.
-    // y luego le asignaremos un valor luego de comprobar que el valor cumple con la condicion.
+//Para realizar la validacion, crearemos un objeto con los campos que queremos validar y sus respectivos valores.
+// y luego le asignaremos un valor luego de comprobar que el valor cumple con la condicion.
 export function validate (input){
         let errors = {};
         switch (true) {
-            case !input.name:
+            case !input.name || input.name.length < 3:
                 errors.name = 'Name is required';
                 break;
-            case !input.summary:
+            case !input.summary || input.summary.length < 10:
                 errors.summary = 'Summary is required';
                 break;
-            case !input.healthScore:
-                errors.healthScore = 'Health Score is required';
+            case !input.healthScore || input.healthScore < 0 || input.healthScore > 100 || isNaN(input.healthScore):
+                errors.healthScore = 'Health Score is required and must be a number between 0 and 100';
                 break;
-            case input.healthScore < 0 || input.healthScore > 100:
-                errors.healthScore = 'Health Score must be between 0 and 100';
-                break;
-            case input.healthScore && !/^[0-9\b]+$/.test(input.healthScore):
-                errors.healthScore = 'Health Score must be a number';
-                break;
-            case !input.steps:
+            case !input.steps || input.steps.length < 10:
                 errors.steps = 'Steps is required';
-                break;
-            case !input.diets:
-                errors.diets = 'Diets is required';
                 break;
             default:
                 break;
@@ -41,17 +31,16 @@ export function validate (input){
         return errors;
     }
     
+  
+    
 
 
 export default function RecipeCreate() {
-    /////  ACTIONS QUE IMPORTAMOS DE REDUX /////
     const dispatch = useDispatch();
-    ////////// ESTADO INICIAL QUE USAREMOS PARA CREAR LA RECETA IMPORTADO DE REDUX //////////
     const diets = useSelector((state) => state.diets);
-    /////////// HISTORY QUE USAREMOS PARA REDIRIGIR A LA PAGINA DE HOME ///////////
-    const history = useHistory();
+   const history = useHistory();
 
-    //////// ESTADOS LOCALES ////////
+    //////// ZONA DE ESTADOS LOCALES ////////
     const [input, setInput] = useState({
         name: '',
         summary: '',
@@ -59,118 +48,89 @@ export default function RecipeCreate() {
         steps: '',
         diets: [],
     });
-    const [errors, setErrors] = useState({});
 
-
-    ////////// MONTADO DE COMPONENTE CUANDO SE RENDERIZA //////////
+    const [errors, setErrors] = useState({
+        name: '',
+        summary: '',
+        healthScore: '',
+        steps: '',
+        diets: [],
+    });
+    
     useEffect(() => {
-        dispatch(getDiets());
+        dispatch(getDiets());  
     }, [dispatch]);
     
-   
-    ///// HANDLE PARA MANEJAR LOS CAMBIOS EN LOS INPUTS /////
-     //FUNCION QUE SE EJECUTA CUANDO SE ESCRIBE EN EL INPUT
-    // al mismo tiempo que se setea el estado del formulario, se ejecuta la funcion validate
+    // Al mismo tiempo que se setea el estado del formulario, se ejecuta la funcion validate
     // la cual devuelve un objeto con los errores, y se setea el estado de los errores
     function handleChange(e) {
-        setInput({...input,[e.target.name]: e.target.value,}); //
-        setErrors(validate({...input,[e.target.name]: e.target.value,})); ////  el value se pasa con esta sintaxis porque es un objeto
+        setInput({...input,[e.target.name]: e.target.value,}); 
+        setErrors(validate({...input,[e.target.name]: e.target.value,})); //  el value se pasa con esta sintaxis porque es un objeto
         //aca valido el valor que se esta captando de un input determinado y  se lo seteo al estado del error 
     }
 
-    ///// HANDLE PARA MANEJAR LOS CAMBIOS EN LOS CHECKBOX /////
-    function handleSelect(e) {
-        setInput({
-            ...input,
-            diets: [...input.diets, e.target.value],
-        });
+     function handleCheck(e) {
+        setInput({...input,diets: [...input.diets, e.target.value]});
     }
-/* 
-    function handleCheck (e) {
-        if (input.diets.includes(e.target.value)) {
-            setInput({
-                ...input,
-                diets: input.diets.filter(diet => diet !== e.target.value)
-            })
-        } else {
-            setInput({
-                ...input,
-                diets: [...input.diets, e.target.value]
-            })
-        }
-    } */
-
-    ///////// HANDLE PARA ELIMINAR DIETAS DEL ARRAY /////////
-    function handleDelete (e) {
-        setInput({
-            ...input,
-            diets: input.diets.filter(diet => diet !== e.target.value)
-        })
-    }
-
     ///////// HANDLE PARA SUMITEAR EL FORMULARIO /////////
-    function handleSubmit(e) {
-        e.preventDefault(); // evita recargado de pagina
-        dispatch(createRecipes(input));
-        alert('Recipe created successfully');
-        setInput({
-            name: '',
-            summary: '',
-            healthScore: '',
-            steps: '',
-            diets: [],
-        });
+   async function handleSubmit(e) {
+        e.preventDefault(); 
+        setErrors(validate(input));
+         const errorSave = validate(input);
+        if(Object.values(errorSave).length !== 0){
+          alert('The recipe is not created, fill in the required fields!')
+        }else{
+            dispatch(createRecipes(input));
+            alert('Recipe created successfully');
+            setInput({
+                name: '',
+                summary: '',
+                healthScore: '',
+                steps: '',
+                diets: [],
+            });
         history.push('/home');
+        } 
     }
 
     ////////// ZONA DE RENDERIZADO //////////
     return (
         <div>
-            <Link to="/home"><h1>Home</h1></Link>
-            <h1>Create Recipe</h1>
-         
+            <h1>Create Your Recipe</h1>
             <form onSubmit={handleSubmit}>
                 <label>Name</label>
                 <input type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name" required/>
                 {errors.name && <p>{errors.name}</p>}
-
+                <br/>
                 <label>Summary</label>
-                <input type="text" name="summary" value={input.summary} onChange={handleChange} placeholder="Summary" required/>
+                <textarea type="text" name="summary" value={input.summary} onChange={handleChange} placeholder="Summary" required/>
                 {errors.summary && <p>{errors.summary}</p>}
-
+                <br/>
                 <label>Health Score</label>
                 <input type="number" name="healthScore" value={input.healthScore} onChange={handleChange} placeholder="Health Score" min = "0" max = "100" pattern='[0-9]+' />
-
+                {errors.healthScore && <p>{errors.healthScore}</p>}
+                <br/>
                 <label>Steps</label>
-                <input type="text" name="steps" value={input.steps} onChange={handleChange} placeholder="Steps" required/>
-                
-
-                {/* <label>Image</label> //////////// FALTA AGREGARLO EN EL MODELO ////////////
+                <textarea type="text" name="steps" value={input.steps} onChange={handleChange} placeholder="Steps" required/>
+                {errors.steps && <p>{errors.steps}</p>}
+                <br/>
+                {/* <label>Image</label> 
                 <input type="text" name="image" value={input.image} onChange={handleChange} placeholder="Image" required/> 
                 {errors.image && <p>{errors.image}</p>} */}
-
-                <label>Diets</label>
-                <select>
-                    {diets.map((diet) => (
-                        <option key={diet.id} value={diet.name} onClick={handleSelect}>{diet.name}</option>
-                    ))}
-                </select>
+                <label>Diets</label> 
+                {diets.map((diet) => (
+                    <div key={diet.id}>
+                        <input type="checkbox" name="diets" value={diet} onChange={handleCheck} />
+                        <label>{diet}</label>
+                    </div>
+                ))}
+                <br/>
                 <button type="submit" disabled={Object.keys(errors).length}>Create</button> 
             </form>
-
-
-                    {
-                        input.diets.map((diet) => (
-                            <div key={diet}>
-                                <button value={diet} onClick={handleDelete}>X</button>
-                                <p>{diet}</p>
-                            </div>
-                        ))
-                    }
-
         </div>
     )
 }
+
 
 
 //FLUJO DE TRABAJO CON FORMULARIOS :

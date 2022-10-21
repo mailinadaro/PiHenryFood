@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 require('./db.js');
-const cors = require('cors')
+//const cors = require('cors')
 
 //////////////////////////// SERVER ///////////////////////////////////
 const server = express();
@@ -23,7 +23,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-server.use(cors()) // cors se usa para que el front pueda hacer peticiones al back
+//server.use(cors()) // cors se usa para que el front pueda hacer peticiones al back
 
 
 

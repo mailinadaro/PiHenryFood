@@ -9,14 +9,14 @@ const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, diet
         healthScore,
         steps,
         createdInDB
-    });
-    
-   if(diets){  
-        const dietsDB = await Diet.findAll({ 
-            where : {
-                name : diets
-            }
         });
+    
+        if(diets){  
+            const dietsDB = await Diet.findAll({ 
+                 where : {
+                    name : diets
+                }
+                });
         await newRecipe.addDiet(dietsDB);
     }
     

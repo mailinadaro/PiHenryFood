@@ -1,141 +1,128 @@
-import { GET_DIETS, GET_RECIPES_NAME, GET_RECIPE, CREATE_RECIPES } from '../actions/index.js';
+import { GET_DIETS, GET_ALL_RECIPES, GET_RECIPES_NAME, GET_RECIPE, CREATE_RECIPES } from '../actions/index.js';
 import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, CHANGE_PAGE, RESET_FILTERS } from '../actions/index.js';
 
-const initialState = {
-    diets: [],
-    recipes: [],
-    recipe: {},
-    recipesFiltered: [],
-    recipesFilteredByDiet: [],
-    recipesOrderByScore: [],
-    recipesOrderdByName: [],
+ const initialState = {
+    ///// estados a partir de pedidos al back
+    diets: [],  //  GET_DIETS
+    recipesFiltered: [],  //  GET_RECIPES_NAME
+    recipes: [],  //  GET_ALL_RECIPES
+    allRecipes : [],
+    recipe: {},  //  GET_RECIPE
+    createdRecipe: {},  //  CREATE_RECIPES
 
-    recipesFilteredByPage: [], // este estado es para que se muestren 9 recetas por pagina
-    page: 1, 
-    recipesPerPage: 9, 
 
-    //inicios por defecto
-    order: 'asc',  
-    orderByScore: 'all', 
+    //// estados para el filtrado
+    recipesFilteredByDiet: [], // FILTER_RECIPES_BY_DIET
+    recipesOrderByScore: [], //  ORDER_RECIPES_BY_SCORE
+    recipesOrderdByName: [], //   ORDER_RECIPES_BY_NAME
+   
+
+    recipesFilteredByPage: [],  //  CHANGE_PAGE
+
+
+    // estsdo para el reseteo de filtros y paginado 
+    recipesPerPage: 9, // se usa en el case CHANGE_PAGE
+    currentPage: 1, // se usa en el case CHANGE_PAGE
+
+    order: 'asc',   // se usa en el case ORDER_RECIPES_BY_NAME
+    orderByScore: 'all',
     orderByName: 'all', 
-    filter: 'all', 
-    filterByDiet: 'all', 
+    filter: 'all',  // se usa en el case FILTER_RECIPES_BY_DIET
+ 
     filterByPage: 'all', 
     filterByReset: 'all', 
-    loading: true, // muestra el loading en la pagina principal mientras se cargan las recetas y las dietas 
-    error: false, // muestra el error en la pagina principal si no se cargan las recetas y las dietas
 };
 
 
 
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_DIETS:
+        //// casos para pedidos al back
+        case GET_DIETS: //
+        //console.log(action.payload)
             return {
                 ...state,
                 diets: action.payload,
-                loading: false, // cuando se cargan las dietas se quita el loading
-                error: false // cuando se cargan las dietas se quita el error
             }
-
-
-        case GET_RECIPES_NAME:
+        case GET_ALL_RECIPES: 
             return {
                 ...state,
                 recipes: action.payload,
-                recipesFiltered: action.payload,
-                recipesFilteredByDiet: action.payload, // se agregan estos estado para que se muestren todas las recetas al inicio
-                recipesOrderByScore: action.payload, 
-                recipesOrderdByName: action.payload,
-                loading: false, 
-                error: false 
+                allRecipes: action.payload,
+            }  
+        case GET_RECIPES_NAME: 
+       // console.log(action.payload)
+            return {
+                ...state,
+                recipes: action.payload,
+                allrecipes : state.allRecipes, 
             }
-
-
-        case GET_RECIPE:
+        case GET_RECIPE: 
             return {
                 ...state,
                 recipe: action.payload,
-                loading: false,
-                error: false
+            }
+        case CREATE_RECIPES: 
+            return {
+                ...state,
+                createdRecipe: [...state.createdRecipe, action.payload],
             }
 
 
-        case CREATE_RECIPES:
+        ///// CASOS SYNC
+        case FILTER_RECIPES_BY_DIET: 
+         const filterDiet = state.allRecipes.filter((recipe)=> recipe.diets.find((e)=> e.name === action.payload))
             return {
                 ...state,
-                createdRecipe: [...state.createdRecipe, action.payload]
+                recipes: filterDiet,
+               // recipesFilteredByDiet: action.payload,
+               currentPage: 1, 
             }
-
-        case FILTER_RECIPES_BY_DIET:
+            
+        case ORDER_RECIPES_BY_SCORE: 
+       // console.log(action.payload)
+        let orderByScore = action.payload === 'asc' ? state.allRecipes.sort((a, b) => a.score > b.score ? 1 : b.score > a.socre ? -1 : 0) :
+            state.allRecipes.sort((a, b)=> a.score > b.score ?  -1 : b.score > a.score ? 1 : 0)
             return {
                 ...state,
-                filterByDiet: action.payload,
-                recipesFilteredByDiet: action.payload === 'all' ? state.recipesFiltered : state.recipesFiltered.filter(recipe => recipe.diets.includes(action.payload)),
-                page: 1, // cuando se filtra por dietas se vuelve a la pagina 1 
+               // orderByScore: action.payload,
+              recipes: orderByScore,
+            //  recipesOrderByScore: action.payload,
+                //currentPage: 1,
             }
-
-
-
-        case ORDER_RECIPES_BY_SCORE:
+        case ORDER_RECIPES_BY_NAME: 
+       // console.log(action.payload)
+        let orderByName = action.payload === 'asc' ? state.allRecipes.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0) :
+            state.allRecipes.sort((a, b)=> a.name > b.name ?  -1 : b.name > a.name ? 1 : 0)
             return {
                 ...state,
-                orderByScore: action.payload,
-                recipesOrderByScore: action.payload === 'all' ? state.recipesFilteredByDiet : action.payload === 'asc' ? state.recipesFilteredByDiet.sort((a, b) => a.spoonacularScore - b.spoonacularScore) : state.recipesFilteredByDiet.sort((a, b) => b.spoonacularScore - a.spoonacularScore),
-                page: 1, 
+                //orderByName: action.payload,
+                recipes: orderByName,  
+               // recipesOrderdByName: action.payload,
+               // currentPage: 1,
+            } 
+        case CHANGE_PAGE: 
+            //console.log(action.payload)
+            return {
+                ...state,
+                //filterByPage: action.payload, 
+                currentPage: Number(action.payload)? action.payload : action.payload === 'Next' ? (parseInt(state.currentPage) + 1 )  : (parseInt(state.currentPage) - 1 )
             }
-
-        
-        case ORDER_RECIPES_BY_NAME:
+       
+        case RESET_FILTERS: 
             return {
                 ...state,
-                orderByName: action.payload,
-                recipesOrderdByName: action.payload === 'all' ? state.recipesOrderByScore : action.payload === 'asc' ? state.recipesOrderByScore.sort((a, b) => a.title.localeCompare(b.title)) : state.recipesOrderByScore.sort((a, b) => b.title.localeCompare(a.title)),
-                page: 1,
-            }
-
-        case CHANGE_PAGE:
-            return {
-                ...state,
-                page: action.payload,
-                recipesFilteredByPage: state.recipesOrderdByName.slice((action.payload - 1) * state.recipesPerPage, action.payload * state.recipesPerPage),
-            }
-
-        case RESET_FILTERS:
-            return {
-                ...state,
-                filterByReset: action.payload,
-                recipesFilteredByDiet: state.recipes,
+               // filterByReset: action.payload,
+                recipesFilteredByDiet: state.recipes, 
                 recipesOrderByScore: state.recipes,
                 recipesOrderdByName: state.recipes,
-                page: 1,
-            }
+                //recipesFilteredByPage: state.recipes.slice(0, 9), 
+                currentPage: 1,
+            } 
         default:
             return {...state}
     }
 }
 
 
-
-////// RECORDATORIO TEORICO //////
-
-// La funcion del REDUCER es que recibe un estado inicial y una accion
-//                               y devuelve un nuevo estado gracias a la accion que se le pasa
-// Poodriamos decir que reducer esta intimamente relacionado con el ESTADO de la aplicacion.
-// El reducer es una funcion pura, es decir, que no modifica el estado que recibe, sino que devuelve un nuevo estado
-// Por ese mismo motivo se usan metodos no mutables como filter, map, reduce, etc.
-
-
-
-// El estado inicial es un objeto vacio y es el estado de la aplicacion antes de que se ejecute ninguna accion
-// Ese estado una vez actualizado se le pasa al store y el store se encarga de actualizar el estado de la aplicacion
-// El store se le pasa al provider y el provider se encarga de pasar el estado a los componentes que lo necesiten
-// El componente se le pasa aL hook useSelector y este hook se encarga de devolver el estado que necesitamos
-// El componente se renderiza con el estado actualizado y se le pasa al dispatch la accion que queremos ejecutar
-// El dispatch se la pasa al reducer y el reducer se encarga de actualizar el estado de la aplicacion
-// El estado se actualiza y se renderiza el componente con el estado actualizado
-// El ciclo se repite hasta que el usuario cierre la aplicacion
-
-
-//-----> reducer ---> store ---> provider ---> useSelector o useDispatch ---> componente ---> dispatch ---> reducer ---> store ---> componente ---> renderizado
 

@@ -4,15 +4,12 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Diet', {
+  sequelize.define('diet', {
     id: {
-      type: DataTypes.UUID, //  este tipo de dato es para que se genere un id automaticamente con un formmato que no se repita
-        defaultValue: DataTypes.UUIDV4, // este es un id que se genera automaticamente pero en formato de string
+      type: DataTypes.INTEGER, //  este tipo de dato es para que se genere un id automaticamente con un formmato que no se repita
+       autoIncrement: true,
         allowNull: false,
         primaryKey: true,
-        validate: {
-          isUUID: 4, // esta vaidacion es para que el id sea un uuid de version 4 por lo que no se puede repetir
-        }
     },
     name : {
         type: DataTypes.STRING,

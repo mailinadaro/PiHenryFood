@@ -1,57 +1,51 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {changePage} from '../../redux/actions/index.js'
-//import { useEffect } from 'react'
 
 
 export default function Paginado () {
     const dispatch = useDispatch();
-    const recipesFiltredByPage = useSelector((state) => state.recipesFiltredPerPage);
+
+    const recipesPerPage = useSelector((state) => state.recipesPerPage);
     const recipes = useSelector((state) => state.recipes);
-    const currentPage = useSelector((state) => state.page); 
+    const currentPage = useSelector((state) => state.currentPage);
    
     // Iteracion para mostrar los numeros de paginas
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(recipes / recipesFiltredByPage); i++) {
+    const allRecipes = recipes.length;
+    for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
         pageNumbers.push(i);
     }
-
-
+   //console.log(pageNumbers)
+   
     function handlerChangePage (e) {
-        if (e.target.value === 'next') {
-            dispatch(changePage(currentPage + 1))
-        } else if (e.target.value === 'prev') { 
-            dispatch(changePage(currentPage - 1)) 
-        } else {
-            dispatch(changePage(Number(e.target.value))) 
-        }
+        dispatch(changePage(e.target.value))
+       // console.log(e.target.value)
     }
 
+   //console.log(currentPage)
     
     return (
         <div>
             <nav>
-                {pageNumbers && currentPage > 1 ? <button onClick={handlerChangePage}>Prev</button> : null}
+                 {pageNumbers && currentPage > 1 ? <button value= 'Prev' onClick={handlerChangePage}>Prev</button> : null}  
                
-                <ul>
-                    {pageNumbers?.map(number => (              //mapeo para mostrar los numeros de paginas de forma lista y con un link
-                        <li key={number}>
-                            <Link to = {`/home/${number}`} onClick={handlerChangePage}> {number} </Link>
-                             {/*  Opcion 2:<button  key={number} onClick={handlerChangePage}>{number}</button> */}
-                        </li>
+            
+                    {pageNumbers?.map(number => (            
+                        <button key={number} value={number} onClick={handlerChangePage}>{number}</button>   
                     ))}
-                </ul>
+             
                 
-                {pageNumbers && currentPage < pageNumbers.length ? <button onClick={handlerChangePage}>Next</button> : null}
+                 {pageNumbers && currentPage < pageNumbers.length ? <button value = 'Next' onClick={handlerChangePage}>Next</button> : null} 
+            
             </nav>
-     
+    
         </div>
     )
 }
 
 
-               
+
                     
                 
               

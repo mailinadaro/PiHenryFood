@@ -1,18 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 
 
 
-
-export default function Recipes (name, image, diets, healthScore) {
+export default function RecipeCard ({id, name, healthScore, image, diets}) {
     return (
         <div>
-            <Link to="/recipes/:id">
-                <h1>{name}</h1>
-            </Link>
-              {/*   <img src={image} alt="image" /> */}
-                <h3>{diets}</h3>
-                <h3>{healthScore}</h3>
+                <div>
+                    <p>{id}</p>
+                    <p>{name}</p>
+                    <p>{healthScore}</p>
+                    <img src={image} alt={name}/>
+                    <p>{diets.map(diet => diet.name)}</p>
+
+                </div>
         </div>
     )
 }

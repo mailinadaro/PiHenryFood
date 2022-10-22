@@ -20,7 +20,7 @@ const getRecipesApi = async ()=> {
             diets: element.diets.map((element) => ({name:element})),
         }
     });
-    console.log(recipesApi2)
+   // console.log(recipesApi2)
         return recipesApi2; 
     } catch (error) {
         console.log(error) 
@@ -39,7 +39,7 @@ const getRecipesDb = async () => {
                 through: {attributes: []} //no necesito los atributos de la tabla intermedia
             }
         });
-        console.log(recipesDb)
+        //console.log(recipesDb)
         return recipesDb; // devuelve las recetas de la base de datos
     } catch (error) {
         console.log(error);  

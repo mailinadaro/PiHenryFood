@@ -7,13 +7,13 @@ import {getRecipesName} from "../../redux/actions/index.js";
 export default function SearchBar(){
     const dispatch = useDispatch();
     const [input, setInput] = useState("");
-    //console.log(input)
+    console.log(input)
 
   
     ////// MANEJA EL ESTADO DEL INPUT //////
     function handleChange(e) {
         setInput(e.target.value); 
-       // console.log(e.target.value)
+        console.log(e.target.value)
     }
 
     ////// MANEJA EL SUBMIT DEL FORMULARIO //////

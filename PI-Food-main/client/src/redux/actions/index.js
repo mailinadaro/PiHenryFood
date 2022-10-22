@@ -74,6 +74,7 @@ export const getRecipesName = (name) => {
             payload: response.data
             })
         }catch(error){
+            alert("This recipe doesn't exit");
             console.log(error)
         }   
 }
@@ -111,14 +112,14 @@ export const filterRecipesByDiet = (payload) => (dispatch) => {
 export const orderRecipesByScore = (payload) => (dispatch) => {
     dispatch({
         type: ORDER_RECIPES_BY_SCORE,
-        payload: payload
+        payload
     })
 }
 
 export const orderRecipesByName = (payload) => (dispatch) => {
     dispatch({
         type: ORDER_RECIPES_BY_NAME,
-        payload: payload
+        payload
     })
 }
 
@@ -126,7 +127,7 @@ export const orderRecipesByName = (payload) => (dispatch) => {
 export const changePage = (payload) => (dispatch) => {
     dispatch({
         type: CHANGE_PAGE,
-        payload: payload
+        payload
     })
 }
 
@@ -134,11 +135,7 @@ export const changePage = (payload) => (dispatch) => {
 
 
 
-export const resetFilters = () =>(dispatch) => {
-    dispatch({
-        type: RESET_FILTERS
-    })
-}
+
 
 
 export const getRecipe = (id) => {

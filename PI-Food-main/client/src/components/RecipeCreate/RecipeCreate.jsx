@@ -31,9 +31,6 @@ export function validate (input){
         return errors;
     }
     
-  
-    
-
 
 export default function RecipeCreate() {
     const dispatch = useDispatch();
@@ -70,7 +67,7 @@ export default function RecipeCreate() {
     }
 
      function handleCheck(e) {
-        setInput({...input,diets: [...input.diets, e.target.value]});
+        setInput({...input, diets: [...input.diets, e.target.value]});
     }
     ///////// HANDLE PARA SUMITEAR EL FORMULARIO /////////
    async function handleSubmit(e) {
@@ -117,6 +114,7 @@ export default function RecipeCreate() {
                 {/* <label>Image</label> 
                 <input type="text" name="image" value={input.image} onChange={handleChange} placeholder="Image" required/> 
                 {errors.image && <p>{errors.image}</p>} */}
+              
                 <label>Diets</label> 
                 {diets.map((diet) => (
                     <div key={diet.id}>
@@ -125,6 +123,7 @@ export default function RecipeCreate() {
                     </div>
                 ))}
                 <br/>
+                
                 <button type="submit" disabled={Object.keys(errors).length}>Create</button> 
             </form>
         </div>

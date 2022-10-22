@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false, 
       validate : {
         notEmpty : true,
-        isAlpha : true,
+       // isAlpha : true,
       },
       //defaultValue: "No name", 
     },
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       //defaultValue: 0,
       validate : {
-        isInt: true,
+        isNumeric : true, 
         min : 0, // para que el health score no pueda ser menor 
         max : 100, // el health score no pueda exceder de este valor
         notEmpty : true 

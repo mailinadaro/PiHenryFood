@@ -1,0 +1,71 @@
+.recipeDetail {
+  display: flex;
+  flex-direction: row wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.recipeDetail__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+
+.recipeDetail__img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+.recipeDetail__info__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.img{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.score{
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.summary{
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.steps{
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 10px;
+}

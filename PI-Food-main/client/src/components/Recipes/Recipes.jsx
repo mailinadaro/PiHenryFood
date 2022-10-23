@@ -4,9 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { useEffect, useState } from "react";
 //import RecipeCard from "../RecipeCard/RecipeCard.jsx";
 import { getAllRecipes, getDiets, filterRecipesByDiet, orderRecipesByName, orderRecipesByScore} from "../../redux/actions";
-// para que se renderice el ordenamento y se vea en el navegador se debe hacer un dispatch de la accion que se quiere ejecutar en el componente que se quiere renderizar en este caso en el componente Order.jsx  y en el componente FilterByDiets.jsx  y en el componente Paginado.jsx    
-
-
+import "./Recipes.css";
 
 export default function Recipes() {
   const dispatch = useDispatch();
@@ -53,32 +51,36 @@ useEffect(() => {
 
   return (
     <div>
-       <select onChange={(e)=> handlerFilterDiets(e)} >
+      <div className="filters__container">
+       <select className="select__diet" onChange={handlerFilterDiets}>
                 <option>Select a Diet</option>
                 {diets?.map((diet) => (
                     <option key={diet} value={diet}>{diet} </option>
                 ))} 
             </select>
 
-            <div>
+            <div className="sort">
                 <button value="asc" onClick ={(e)=> handlerSortName(e)}>A-Z</button>
                 <button value="desc" onClick = {(e)=> handlerSortName(e)}>Z-A</button>
          
             </div>
-            <div>
+            <div className="sort">
                <button value ="up" onClick = {(e)=> handlerSortScore(e)}>More</button>
                <button value="down" onClick={(e)=>handlerSortScore(e)}>Less</button>
             </div>  
-      <div>
+
+      </div>
+
+      <div className="recipes__container">
         {currentRecipes?.map((recipe) => {
           return (
-            <div key={recipe.id}>
-              <Link to={`/recipes/${recipe.id}`}>
+            <div key={recipe.id} className="recipes__card">
+              <Link to={`/recipes/${recipe.id}`} className="recipes__card__link">
                 <p>{recipe.name}</p>
-                <img src={recipe.image} alt={recipe.name} />
+                <img className="recipes__card__imagen" src={recipe.image} alt="recipe" />
               </Link>
-              <p>{recipe.healthScore}</p>
-              <p>{recipe.diets.map((diet) => diet.name)}</p>
+              <p>Health Score: {recipe.healthScore}</p>
+              <p className="recipes__card__diets">{recipe.diets.map((diet) => diet.name).join(" | ")}</p>
             </div>
           );
         })}

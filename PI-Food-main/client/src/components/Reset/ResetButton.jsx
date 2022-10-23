@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {getAllRecipes } from "../../redux/actions/index.js";
-
+import './ResetButton.css';
 
 
 export default function ResetButton () {
@@ -14,7 +14,7 @@ export default function ResetButton () {
 
     return (
         <div>
-            <button onClick={(e)=>clickHandler(e)}>Reset</button>   
+            <button className="resetButton" onClick={clickHandler}>Reset</button>
         </div>
     )
 }

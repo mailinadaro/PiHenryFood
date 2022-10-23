@@ -1,5 +1,5 @@
 import { GET_DIETS, GET_ALL_RECIPES, GET_RECIPES_NAME, GET_RECIPE, CREATE_RECIPES } from '../actions/index.js';
-import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, CHANGE_PAGE } from '../actions/index.js';
+import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, CHANGE_PAGE, CLEAN_DETAIL } from '../actions/index.js';
 
  const initialState = {
     ///// estados a partir de pedidos al back
@@ -37,6 +37,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: action.payload,
                 allrecipes : state.allRecipes, 
+                currentPage : 1,
             }
         case GET_RECIPE: 
             return {
@@ -44,7 +45,7 @@ export default function rootReducer(state = initialState, action) {
                 recipe: action.payload,
             }
         case CREATE_RECIPES: 
-        console.log(action.payload)
+       // console.log(action.payload)
             return {
                 ...state,
                 createdRecipe: [...state.createdRecipe, action.payload],
@@ -58,7 +59,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: filterDiet,
                //recipesFilteredByDiet: action.payload, 
-               //currentPage: 1, 
+               currentPage: 1, 
             }
             
         case ORDER_RECIPES_BY_SCORE: 
@@ -70,7 +71,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: orderByScore,
                // recipesOrderByScore: action.payload,
-               // currentPage: 1,
+                currentPage: 1,
             } 
         case ORDER_RECIPES_BY_NAME: 
             console.log(action.payload)
@@ -81,7 +82,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: orderByName,  
                 //recipesOrderdByName: action.payload,
-                //currentPage: 1,
+                currentPage: 1,
             } 
         case CHANGE_PAGE: 
             //console.log(action.payload)
@@ -90,6 +91,11 @@ export default function rootReducer(state = initialState, action) {
                 //recipesFilteredByPage: action.payload, 
                 currentPage: Number(action.payload)? action.payload : action.payload === 'Next' ? (parseInt(state.currentPage) + 1 )  : (parseInt(state.currentPage) - 1 )
             }
+            case CLEAN_DETAIL:
+                return {
+                    ...state, 
+                    recipe: {}
+                }
        
     
         default:

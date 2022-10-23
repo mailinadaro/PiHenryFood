@@ -22,6 +22,7 @@ export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
 export const GET_RECIPES_NAME = 'GET_RECIPES_NAME';
 export const GET_RECIPE = 'GET_RECIPE';
 export const CREATE_RECIPES = 'CREATE_RECIPES';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 
 export const FILTER_RECIPES_BY_DIET = 'FILTER_RECIPES_BY_DIET';
 export const ORDER_RECIPES_BY_SCORE = 'ORDER_RECIPES_BY_SCORE';
@@ -131,11 +132,12 @@ export const changePage = (payload) => (dispatch) => {
     })
 }
 
-
-
-
-
-
+export const cleanDetail = () => (dispatch) => {
+    dispatch({
+        type: CLEAN_DETAIL,
+     
+    })
+}
 
 
 export const getRecipe = (id) => {
@@ -151,6 +153,8 @@ export const getRecipe = (id) => {
         }
     }
 }
+
+
 
 
 

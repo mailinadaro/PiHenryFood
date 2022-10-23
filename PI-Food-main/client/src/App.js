@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
-import Landing from './components/Landing/Landing';
-import Home from './components/Home/Home';
-import RecipesDetail from './components/RecipesDetail/RecipesDetail'
-import RecipeCreate from './components/RecipeCreate/RecipeCreate';
-import PageError from './components/Error404/PageError'; 
+import NavBar from './views/NavBar/NavBar';
+import Landing from './views/Landing/Landing';
+import Home from './views/Home/Home';
+import RecipesDetail from './views/RecipesDetail/RecipesDetail'
+import RecipeCreate from './views/RecipeCreate/RecipeCreate';
+import PageError from './views/Error404/PageError'; 
 
 
 

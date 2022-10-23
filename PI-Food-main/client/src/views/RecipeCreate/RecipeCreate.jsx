@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import {useHistory } from 'react-router-dom';
 import {createRecipes} from '../../redux/actions';
 import {getDiets} from '../../redux/actions/index.js';
-
+import './RecipeCreate.css';
 
 
  ////////// FUNCION DE VALIDACION DE CAMPOS //////////
@@ -13,14 +13,14 @@ import {getDiets} from '../../redux/actions/index.js';
 export function validate (input){
         let errors = {};
         switch (true) {
-            case !input.name || input.name.length < 3:
-                errors.name = 'Name is required';
-                break;
-            case !input.summary || input.summary.length < 10:
-                errors.summary = 'Summary is required';
+            case !input.name || input.name.length < 3  ||  !/^[a-zA-Z]+$/.test(input.name) :
+                errors.name = 'Name is required and must be alphanumeric';
                 break;
             case !input.healthScore || input.healthScore < 0 || input.healthScore > 100 || isNaN(input.healthScore):
-                errors.healthScore = 'Health Score is required and must be a number between 0 and 100';
+                    errors.healthScore = 'Health Score is required and must be a number between 0 and 100';
+                    break;
+            case !input.summary || input.summary.length < 10:
+                errors.summary = 'Summary is required';
                 break;
             case !input.steps || input.steps.length < 10:
                 errors.steps = 'Steps is required';
@@ -40,18 +40,19 @@ export default function RecipeCreate() {
     //////// ZONA DE ESTADOS LOCALES ////////
     const [input, setInput] = useState({
         name: '',
-        summary: '',
         healthScore: '',
-        steps: '',
         diets: [],
+        summary: '',
+        steps: '',
+      
     });
 
     const [errors, setErrors] = useState({
         name: '',
-        summary: '',
         healthScore: '',
-        steps: '',
         diets: [],
+        summary: '',
+        steps: '',
     });
     
     useEffect(() => {
@@ -81,10 +82,10 @@ export default function RecipeCreate() {
             alert('Recipe created successfully');
             setInput({
                 name: '',
-                summary: '',
                 healthScore: '',
-                steps: '',
                 diets: [],
+                summary: '',
+                steps: '',
             });
         history.push('/home');
         } 
@@ -95,36 +96,48 @@ export default function RecipeCreate() {
         <div>
             <h1>Create Your Recipe</h1>
             <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name" required/>
-                {errors.name && <p>{errors.name}</p>}
+                <div className='form__group'>
+                <label className='form-label'>Name</label>
+                <input className={errors.name ? "form__input__error" : "form__input"} type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name" required/>
+                {errors.name && <p className='form__error'>{errors.name}</p>}
                 <br/>
-                <label>Summary</label>
-                <textarea type="text" name="summary" value={input.summary} onChange={handleChange} placeholder="Summary" required/>
-                {errors.summary && <p>{errors.summary}</p>}
+
+                <label className='form__label'>Health Score</label>
+                <input className={errors.healthScore ? "form__input__error" : "form__input"} type="number" name="healthScore" value={input.healthScore} onChange={handleChange} placeholder="Health Score" min = "0" max = "100" pattern='[0-9]+' />
+                {errors.healthScore && <p className='form__error'>{errors.healthScore}</p>}
                 <br/>
-                <label>Health Score</label>
-                <input type="number" name="healthScore" value={input.healthScore} onChange={handleChange} placeholder="Health Score" min = "0" max = "100" pattern='[0-9]+' />
-                {errors.healthScore && <p>{errors.healthScore}</p>}
-                <br/>
-                <label>Steps</label>
-                <textarea type="text" name="steps" value={input.steps} onChange={handleChange} placeholder="Steps" required/>
-                {errors.steps && <p>{errors.steps}</p>}
-                <br/>
-                {/* <label>Image</label> 
-                <input type="text" name="image" value={input.image} onChange={handleChange} placeholder="Image" required/> 
-                {errors.image && <p>{errors.image}</p>} */}
-              
-                <label>Diets</label> 
+
+
+                <label className='form__label'>Diets</label>
+                <div className='form__diets__container'>
                 {diets.map((diet) => (
                     <div key={diet.id}>
-                        <input type="checkbox" name="diets" value={diet} onChange={handleCheck} />
+                        <input className='form__checkbox' type="checkbox" name="diets" value={diet} onChange={handleCheck} />
                         <label>{diet}</label>
                     </div>
                 ))}
+                </div>
                 <br/>
+
+                <label className='form__label'>Summary</label>
+                <textarea className={errors.summary ? 'form__textarea__error' : "form__textarea"} type="text" name="summary" value={input.summary} onChange={handleChange} placeholder="Write a summary..." required/>
+                {errors.summary && <p className='form__error'>{errors.summary}</p>}
+                <br/>
+
                 
-                <button type="submit" disabled={Object.keys(errors).length}>Create</button> 
+
+                <label className='form__label'>Steps</label>
+                <textarea className={errors.steps ? 'form__textarea__error' : "form__textarea"} type="text" name="steps" value={input.steps} onChange={handleChange} placeholder="Write your steps..." required/>
+                {errors.steps && <p className='form__error'>{errors.steps}</p>}
+                <br/>
+
+                {/* <label>Image</label> 
+                <input type="text" name="image" value={input.image} onChange={handleChange} placeholder="Image" required/> 
+                {errors.image && <p>{errors.image}</p>} */}
+                </div>
+                
+                <button className='form__button' type="submit" disabled={Object.keys(errors).length}>Create</button> 
+                
             </form>
         </div>
     )

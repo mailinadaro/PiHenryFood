@@ -1,6 +1,7 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {changePage} from '../../redux/actions/index.js'
+import './Paginado.css'
 
 export default function Paginado () {
     const dispatch = useDispatch();
@@ -24,13 +25,13 @@ export default function Paginado () {
     return (
         <div>
             <nav>
-                 {pageNumbers && currentPage > 1 ? <button value= 'Prev' onClick={handlerChangePage}>Prev</button> : null}  
+                 {pageNumbers && currentPage > 1 ? <button  className="prev__button" value= 'Prev' onClick={handlerChangePage}>Prev</button> : null}  
                
                     {pageNumbers?.map(number => (            
-                        <button key={number} value={number} onClick={handlerChangePage}>{number}</button>   
+                        <button key={number} className="button" value={number} onClick={handlerChangePage}>{number}</button>   
                     ))}
               
-                 {pageNumbers && currentPage < pageNumbers.length ? <button value = 'Next' onClick={handlerChangePage}>Next</button> : null} 
+                 {pageNumbers && currentPage < pageNumbers.length ? <button className="next__button" value = 'Next' onClick={handlerChangePage}>Next</button> : null} 
             
             </nav>
     

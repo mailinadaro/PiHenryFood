@@ -2,6 +2,7 @@ import React from "react";
 import{useState} from "react";
 import { useDispatch} from "react-redux";
 import {getRecipesName} from "../../redux/actions/index.js";
+import './SearchBar.css';
 
 
 export default function SearchBar(){
@@ -9,14 +10,11 @@ export default function SearchBar(){
     const [input, setInput] = useState("");
     console.log(input)
 
-  
-    ////// MANEJA EL ESTADO DEL INPUT //////
     function handleChange(e) {
         setInput(e.target.value); 
         console.log(e.target.value)
     }
 
-    ////// MANEJA EL SUBMIT DEL FORMULARIO //////
     function handleSubmit(e) {
         e.preventDefault();
         dispatch(getRecipesName(input)); 
@@ -25,10 +23,9 @@ export default function SearchBar(){
 
     return (
         <div>
-  
-        <form onSubmit={(e)=>handleSubmit(e)}>
-                <input type="text" placeholder="Search..." value={input} onChange={(e)=>handleChange(e)} />
-                <button type="submit">Search</button>
+            <form className="searchBar" onSubmit={(e) => handleSubmit(e)}>
+                <input className="searchBar__input" type="text" placeholder="Search a recipe" value={input} onChange={(e) => handleChange(e)} />
+                <button className = 'searchBar__button' type="submit">Search</button>
             </form> 
         </div>
     ); 

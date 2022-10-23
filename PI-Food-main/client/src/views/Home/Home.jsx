@@ -1,15 +1,13 @@
 import React  from "react";
-import SearchBar from "../SearchBar/SearchBar.jsx";
-import Paginado from "../Paginado/Paginado.jsx";
-import ResetButton from "../Reset/ResetButton.jsx";
-import Recipes from "../Recipes/Recipes.jsx";
+import Paginado from "../../components/Paginado/Paginado";
+import Recipes from "../../components/Recipes/Recipes";
+import ResetButton from "../../components/Reset/ResetButton";
 
 export default function Home() {
     
     return (
         <div>
             <div>
-                <SearchBar />
                 <ResetButton/>
             </div>
             <div>

@@ -1,0 +1,23 @@
+
+.button{
+    border: 2px solid rgba(34, 34, 34, 0.2);
+    border-radius: 1em;
+    margin-left: auto;
+    padding: 0.25em 1em;
+}
+
+.prev__button{
+    border: 2px solid rgba(34, 34, 34, 0.2);
+    border-radius: 1em;
+    margin-left: auto;
+    padding: 0.25em 1em;
+/*     content: url(ico-arrow-prev); */
+}
+
+.next__button{
+    border: 2px solid rgba(34, 34, 34, 0.2);
+    border-radius: 1em;
+    margin-left: auto;
+    padding: 0.25em 1em;
+/*     content: url(ico-arrow-next); */
+}

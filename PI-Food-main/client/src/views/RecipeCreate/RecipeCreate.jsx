@@ -6,6 +6,7 @@ import {createRecipes} from '../../redux/actions';
 import {getDiets} from '../../redux/actions/index.js';
 import './RecipeCreate.css';
 import create from '../../assets/img/create-recipe.jpg';
+import {Link} from 'react-router-dom';
 
  ////////// FUNCION DE VALIDACION DE CAMPOS //////////
 //Para realizar la validacion, crearemos un objeto con los campos que queremos validar y sus respectivos valores.
@@ -37,7 +38,7 @@ export default function RecipeCreate() {
     const diets = useSelector((state) => state.diets);
    const history = useHistory();
 
-    //////// ZONA DE ESTADOS LOCALES ////////
+
     const [input, setInput] = useState({
         name: '',
         healthScore: '',
@@ -93,8 +94,8 @@ export default function RecipeCreate() {
 
     return (
         <div className='container'>
-
-           <div className='img__container'>
+ 
+           <div className='img__container'> 
                 <img src={create} alt='create' className='img__create'/>
             </div>
  
@@ -102,6 +103,7 @@ export default function RecipeCreate() {
            
             <form onSubmit={handleSubmit}>
                 <div className='form__group'>
+             
                 <h1 className='title'>Create your own recipe</h1>
                 <label className='form__label'>Name</label>
                 <input className={errors.name ? "form__input__error" : "form__input"} type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name of de Recipe..." required/>
@@ -143,7 +145,7 @@ export default function RecipeCreate() {
                 </div>
                 
                 <button className='form__button' type="submit" disabled={Object.keys(errors).length}>Create</button> 
-                
+                <Link to='/home'> <button className='buttonBack'>Back</button></Link>
             </form>
         
         </div>

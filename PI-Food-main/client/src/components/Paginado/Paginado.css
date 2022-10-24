@@ -20,6 +20,22 @@
     padding: 0.25em 1em;
 }
 
+.button:active{
+    background-color: rgba(67,97,31,0822);
+}
+
+.current__button{
+    border: 2px solid rgba(34, 34, 34, 0.2);
+    border-radius: 1em;
+    padding: 0.25em 1em;
+    background-color: rgba(67,97,31,0822);
+}
+
+.button[value=currentPage]:hover{
+    background-color: rgba(67, 97, 31, 0.822);
+}
+
+
 .button:hover{
     border: 2px solid rgba(67, 97, 31, 0.822);
     transform: scale(1.05);
@@ -52,3 +68,5 @@
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+

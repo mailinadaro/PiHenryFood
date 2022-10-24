@@ -80,7 +80,7 @@ useEffect(() => {
           return (
             <div key={recipe.id} className="recipes__card">
               <Link to={`/recipes/${recipe.id}`} className="recipes__card__link">
-                <img className="recipes__card__imagen" src={recipe.image} alt="recipe"/>
+                <img className="recipes__card__image" src={recipe.image} alt="recipe"/>
                 <p>{recipe.name}</p>
               </Link>
 

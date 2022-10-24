@@ -9,6 +9,9 @@ import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, 
     recipe: {},  
     createdRecipe: {},  
 
+
+   
+
     // estado para el paginado 
     recipesPerPage: 9, // se usa en el case CHANGE_PAGE
     currentPage: 1, // se usa en el case CHANGE_PAGE
@@ -58,8 +61,8 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 recipes: filterDiet,
-               //recipesFilteredByDiet: action.payload, 
-               currentPage: 1, 
+        
+             //  currentPage: 1, 
             }
             
         case ORDER_RECIPES_BY_SCORE: 
@@ -70,8 +73,8 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 recipes: orderByScore,
-               // recipesOrderByScore: action.payload,
-                currentPage: 1,
+      
+               // currentPage: 1,
             } 
         case ORDER_RECIPES_BY_NAME: 
             console.log(action.payload)
@@ -81,23 +84,20 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 recipes: orderByName,  
-                //recipesOrderdByName: action.payload,
-                currentPage: 1,
+    
+               // currentPage: 1,
             } 
         case CHANGE_PAGE: 
             //console.log(action.payload)
             return {
                 ...state,
-                //recipesFilteredByPage: action.payload, 
-                currentPage: Number(action.payload)? action.payload : action.payload === 'Next' ? (parseInt(state.currentPage) + 1 )  : (parseInt(state.currentPage) - 1 )
+                currentPage: Number(action.payload)? parseInt(action.payload) : action.payload === 'Next' ? (parseInt(state.currentPage) + 1 )  : (parseInt(state.currentPage) - 1 )
             }
             case CLEAN_DETAIL:
                 return {
                     ...state, 
                     recipe: {}
                 }
-       
-    
         default:
             return {...state}
     }

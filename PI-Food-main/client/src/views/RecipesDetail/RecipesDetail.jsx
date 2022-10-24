@@ -5,7 +5,7 @@ import {getRecipe} from '../../redux/actions/index.js'
 import { cleanDetail } from '../../redux/actions/index.js'
 import './RecipeDetail.css'
 import Loading from '../../components/Loading/Loading.jsx'
-
+import {Link} from 'react-router-dom'
 
 export default function RecipesDetail(props) {
   const dispatch = useDispatch();
@@ -42,9 +42,12 @@ export default function RecipesDetail(props) {
 
           {recipe.summary ? (recipe.summary.replace(/<[^>]+>/g, '')) : null}
           <p className="steps">{recipe.steps}</p>
+          <Link to='/home'><button className="backButton">Back</button></Link>
         </div>
 
       </div>
+      
+
     </div>
   );
 }

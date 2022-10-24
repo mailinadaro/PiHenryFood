@@ -6,7 +6,6 @@ import './Paginado.css'
 export default function Paginado () {
     const dispatch = useDispatch();
     const recipes = useSelector((state) => state.recipes);
-
     const recipesPerPage = useSelector((state) => state.recipesPerPage);
     const currentPage = useSelector((state) => state.currentPage);
    
@@ -15,11 +14,11 @@ export default function Paginado () {
     for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
         pageNumbers.push(i);
     }
-   console.log(pageNumbers)
+  // console.log(pageNumbers)
    
     function handlerChangePage (e) {
         dispatch(changePage(e.target.value))
-        console.log(e.target.value)
+        //console.log(e.target.value)
     }
    console.log(currentPage)
     return (
@@ -28,7 +27,7 @@ export default function Paginado () {
                  {pageNumbers && currentPage > 1 ? <button  className="prev__button" value= 'Prev' onClick={handlerChangePage}>Prev</button> : null}  
                
                     {pageNumbers?.map(number => (            
-                        <button key={number} className="button" value={number} onClick={handlerChangePage}>{number}</button>   
+                        <button key={number} className={currentPage === number ? "current__button" : "button"} value={number} onClick={handlerChangePage}>{number}</button>
                     ))}
               
                  {pageNumbers && currentPage < pageNumbers.length ? <button className="next__button" value = 'Next' onClick={handlerChangePage}>Next</button> : null} 
@@ -36,6 +35,12 @@ export default function Paginado () {
         </div>
     )
 }
+
+
+
+
+
+
 
 
 

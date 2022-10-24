@@ -6,6 +6,7 @@
     flex-direction: row wrap;
     align-items: center;
     justify-content: center;
+    margin-top: 2rem;
 }
 
 
@@ -44,6 +45,18 @@
     backdrop-filter: blur(10px);
 }
 
+.buttonBack{
+    background-color: rgb(67, 97, 31, 0.822); 
+    color: #fff;
+    border: none;
+    border-radius: 1em;
+    margin-left: auto;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
 
 
 .title{

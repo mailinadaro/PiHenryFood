@@ -23,8 +23,8 @@ export default function Paginado () {
     }
    console.log(currentPage)
     return (
-        <div>
-            <nav>
+        <div className='paginado'>
+            <div className='button__container'>
                  {pageNumbers && currentPage > 1 ? <button  className="prev__button" value= 'Prev' onClick={handlerChangePage}>Prev</button> : null}  
                
                     {pageNumbers?.map(number => (            
@@ -32,9 +32,7 @@ export default function Paginado () {
                     ))}
               
                  {pageNumbers && currentPage < pageNumbers.length ? <button className="next__button" value = 'Next' onClick={handlerChangePage}>Next</button> : null} 
-            
-            </nav>
-    
+            </div>
         </div>
     )
 }

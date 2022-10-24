@@ -1,23 +1,54 @@
+.paginado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.button__container{
+    margin-top: 3em;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .button{
     border: 2px solid rgba(34, 34, 34, 0.2);
     border-radius: 1em;
-    margin-left: auto;
     padding: 0.25em 1em;
+}
+
+.button:hover{
+    border: 2px solid rgba(67, 97, 31, 0.822);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .prev__button{
     border: 2px solid rgba(34, 34, 34, 0.2);
     border-radius: 1em;
-    margin-left: auto;
     padding: 0.25em 1em;
 /*     content: url(ico-arrow-prev); */
+}
+
+.prev__button:hover{
+    border: 2px solid rgba(67, 97, 31, 0.822);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .next__button{
     border: 2px solid rgba(34, 34, 34, 0.2);
     border-radius: 1em;
-    margin-left: auto;
     padding: 0.25em 1em;
 /*     content: url(ico-arrow-next); */
+}
+
+
+.next__button:hover{
+    border: 2px solid rgba(67, 97, 31, 0.822);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

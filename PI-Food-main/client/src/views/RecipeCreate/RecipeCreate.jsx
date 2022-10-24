@@ -5,7 +5,7 @@ import {useHistory } from 'react-router-dom';
 import {createRecipes} from '../../redux/actions';
 import {getDiets} from '../../redux/actions/index.js';
 import './RecipeCreate.css';
-
+import create from '../../assets/img/create-recipe.jpg';
 
  ////////// FUNCION DE VALIDACION DE CAMPOS //////////
 //Para realizar la validacion, crearemos un objeto con los campos que queremos validar y sus respectivos valores.
@@ -91,19 +91,25 @@ export default function RecipeCreate() {
         } 
     }
 
-    ////////// ZONA DE RENDERIZADO //////////
     return (
-        <div>
-            <h1>Create Your Recipe</h1>
+        <div className='container'>
+
+           <div className='img__container'>
+                <img src={create} alt='create' className='img__create'/>
+            </div>
+ 
+           
+           
             <form onSubmit={handleSubmit}>
                 <div className='form__group'>
-                <label className='form-label'>Name</label>
-                <input className={errors.name ? "form__input__error" : "form__input"} type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name" required/>
+                <h1 className='title'>Create your own recipe</h1>
+                <label className='form__label'>Name</label>
+                <input className={errors.name ? "form__input__error" : "form__input"} type="text" name="name" value={input.name} onChange={handleChange} placeholder="Name of de Recipe..." required/>
                 {errors.name && <p className='form__error'>{errors.name}</p>}
                 <br/>
 
                 <label className='form__label'>Health Score</label>
-                <input className={errors.healthScore ? "form__input__error" : "form__input"} type="number" name="healthScore" value={input.healthScore} onChange={handleChange} placeholder="Health Score" min = "0" max = "100" pattern='[0-9]+' />
+                <input className={errors.healthScore ? "form__input__error" : "form__input"} type="number" name="healthScore" value={input.healthScore} onChange={handleChange} placeholder="Health Score of the Recipe..." min = "0" max = "100" pattern='[0-9]+' />
                 {errors.healthScore && <p className='form__error'>{errors.healthScore}</p>}
                 <br/>
 
@@ -113,7 +119,7 @@ export default function RecipeCreate() {
                 {diets.map((diet) => (
                     <div key={diet.id}>
                         <input className='form__checkbox' type="checkbox" name="diets" value={diet} onChange={handleCheck} />
-                        <label>{diet}</label>
+                        <label className='form__label__checkbox'>{diet}</label>
                     </div>
                 ))}
                 </div>
@@ -139,6 +145,7 @@ export default function RecipeCreate() {
                 <button className='form__button' type="submit" disabled={Object.keys(errors).length}>Create</button> 
                 
             </form>
+        
         </div>
     )
 }

@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import './NavBar.css'
-//import '../../components/SearchBar/SearchBar.css'
+import logo from '../../assets/img/logo.png'
+
 
 
 const NavBar = () => {
@@ -11,15 +12,9 @@ const NavBar = () => {
       <div className="navbar">
 
     <div className="navbar__left">
-        <div className="navbar__home">
-          <Link to="/home"> <h2>Food App</h2> </Link>
-        </div>
-
-        <div className="navbar__create">
-          <Link to="/recipe"> <h2> Create Recipe</h2></Link>
-        </div>
+          <Link to="/home" className="navbar__link"> <img src={logo} alt="logo" className="navbar__logo" /> </Link>
+          <Link to="/recipe" className="navbar__link"> <p> Create Recipe</p></Link>
     </div>
-
         <div className="navbar__search">
           <SearchBar />
         </div>

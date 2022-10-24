@@ -4,14 +4,14 @@ import { useEffect } from 'react'
 import {getRecipe} from '../../redux/actions/index.js'
 import { cleanDetail } from '../../redux/actions/index.js'
 import './RecipeDetail.css'
-
+import Loading from '../../components/Loading/Loading.jsx'
 
 
 export default function RecipesDetail(props) {
   const dispatch = useDispatch();
   const id = props.match.params.id;
   const recipe = useSelector((state) => state.recipe);
-  console.log(recipe);
+  //console.log(recipe);
 
   useEffect(() => {
     dispatch(getRecipe(id));
@@ -22,7 +22,10 @@ export default function RecipesDetail(props) {
 
   return (
     <div>
+         {!recipe.name && <Loading />}
+
       <div className="recipeDetail">
+   
         <div className="recipeDetail__img">
           {recipe.image ? (
             <img className="img" src={recipe.image} alt={recipe.name} />
@@ -33,12 +36,14 @@ export default function RecipesDetail(props) {
           <h1 className="title">{recipe.name}</h1>
 
           <div className="recipeDetail__info__row">
-          <p className="score">{recipe.healthScore}</p> 
-          {recipe.diets ? ( recipe.diets.map((diet) => <p className='diet'>{diet.name}</p>)) : null}
+            <div className='score__circle'><p className="score">{recipe.healthScore}</p></div>
+            {recipe.diets ? ( recipe.diets.map((diet) => <p className='diet'>{diet.name}</p>)) : null}
           </div>
+
           {recipe.summary ? (recipe.summary.replace(/<[^>]+>/g, '')) : null}
           <p className="steps">{recipe.steps}</p>
         </div>
+
       </div>
     </div>
   );

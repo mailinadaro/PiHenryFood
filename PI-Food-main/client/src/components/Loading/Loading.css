@@ -1,0 +1,23 @@
+
+
+.loading{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin-top:2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.loading__text{
+    font-size: 1.5em;
+    font-style:italic;
+    font-weight: 500;
+    color: rgb(67, 97, 31);
+}

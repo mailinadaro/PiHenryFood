@@ -10,13 +10,15 @@ import PageError from './views/Error404/PageError';
 
 
 
+
 function App() {
   return (
     <div className="App">
-    
-      <NavBar />
+      <NavBar />     
+      
       <Switch>
-        <Route exact path="/" component={Landing} />
+
+      <Route exact path="/" component={Landing} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/recipe" component={RecipeCreate} />
         <Route exact path="/recipes/:id" component={RecipesDetail} />

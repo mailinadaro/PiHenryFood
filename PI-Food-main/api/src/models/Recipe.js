@@ -38,8 +38,8 @@ module.exports = (sequelize) => {
       //defaultValue: 0,
       validate : {
         isNumeric : true, 
-        min : 0, // para que el health score no pueda ser menor 
-        max : 100, // el health score no pueda exceder de este valor
+        min : 0, 
+        max : 100, 
         notEmpty : true 
       },
     },
@@ -51,9 +51,6 @@ module.exports = (sequelize) => {
         notEmpty: true,
     },
   },
- /*  image : {
-    type: DataTypes.STRING, 
-  }, */
   createdInDB : {
     type: DataTypes.BOOLEAN,
     allowNull : false,

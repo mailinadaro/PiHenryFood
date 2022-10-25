@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('diet', {
     id: {
-      type: DataTypes.INTEGER, //  este tipo de dato es para que se genere un id automaticamente con un formmato que no se repita
+      type: DataTypes.INTEGER, 
        autoIncrement: true,
         allowNull: false,
         primaryKey: true,

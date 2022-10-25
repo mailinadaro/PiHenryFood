@@ -20,15 +20,12 @@ export default function Recipes() {
 
   useEffect(() => {
     dispatch(getAllRecipes());
+    dispatch(getDiets());
   }, [dispatch]);
 
-  //const dispatch = useDispatch();
   const diets = useSelector((state) => state.diets);
- const [order, setOrder] = useState("")
+  const [order, setOrder] = useState("")
 
-useEffect(() => {
-      dispatch(getDiets());
-  }, [dispatch]);
 
  function handlerFilterDiets (e) {
       dispatch(filterRecipesByDiet(e.target.value));
@@ -56,7 +53,7 @@ useEffect(() => {
         <select className="select" onChange={handlerFilterDiets}>
           <option>Select a Diet</option>
           {diets?.map((diet) => (
-            <option key={diet} value={diet}> {diet}{" "}</option>
+            <option key={diet} value={diet}>{diet}</option>
           ))}
         </select>
 

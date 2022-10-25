@@ -28,11 +28,8 @@
     border: 2px solid rgba(34, 34, 34, 0.2);
     border-radius: 1em;
     padding: 0.25em 1em;
+    color: white;
     background-color: rgba(67,97,31,0822);
-}
-
-.button[value=currentPage]:hover{
-    background-color: rgba(67, 97, 31, 0.822);
 }
 
 

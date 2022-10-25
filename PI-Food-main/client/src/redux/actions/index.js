@@ -37,6 +37,7 @@ export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const getDiets = () => async (dispatch) => {
     try {
         const diets = await axios.get('http://localhost:3001/diets');
+        console.log(diets)
         dispatch({ type: GET_DIETS, payload: diets.data }); 
     } catch (error) {
         console.log(error)

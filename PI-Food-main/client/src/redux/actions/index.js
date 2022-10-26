@@ -37,7 +37,6 @@ export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const getDiets = () => async (dispatch) => {
     try {
         const diets = await axios.get('http://localhost:3001/diets');
-        console.log(diets)
         dispatch({ type: GET_DIETS, payload: diets.data }); 
     } catch (error) {
         console.log(error)
@@ -47,7 +46,7 @@ export const getDiets = () => async (dispatch) => {
 
 
 
-////// VERSION CON ASYNC AWAIT ///////
+
  export const getAllRecipes = () => {
     return async(dispatch) => {
     try {
@@ -70,7 +69,6 @@ export const getRecipesName = (name) => {
     return async (dispatch) => {
         try {
            const response =  await axios.get(`http://localhost:3001/recipes?name=${name}`)
-           //console.log(response)
            dispatch({
             type: GET_RECIPES_NAME,
             payload: response.data
@@ -96,11 +94,7 @@ export const getRecipesName = (name) => {
 
 
 
-////////////// ACTIONS SYNC //////////////
-// se ejecutan en el mismo momento que se ejecuta el dispatch
-// en su sintaxis no se usa async await ni tampoco se usa el try catch
-// casi siempre reciben por parametro un payload que es el que se va a guardar en el store de redux
-// y la logica de desarrolla en el reducer
+
 
 export const filterRecipesByDiet = (payload) => (dispatch) => {
     dispatch({
@@ -161,21 +155,6 @@ export const getRecipe = (id) => {
 
 
 
-//////////////// EXTRA ///////////////
-
-/* export const deleteRecipe = (id) => async (dispatch) => {
-    return await axios.delete(`http://localhost:3001/recipes/${id}`)
-        .then(response => {
-            dispatch({
-                type: DELETE_RECIPE,
-                payload: response.data
-            })
-        })
-        .catch(error => {
-            console.log(error)
-        }
-        )
-} */
 
 
 

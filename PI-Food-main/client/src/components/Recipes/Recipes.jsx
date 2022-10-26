@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect, useState } from "react";
-//import RecipeCard from "../RecipeCard/RecipeCard.jsx";
 import { getAllRecipes, getDiets, filterRecipesByDiet, orderRecipesByName, orderRecipesByScore} from "../../redux/actions";
 import "./Recipes.css";
 import Loading from "../Loading/Loading";
@@ -29,21 +28,21 @@ export default function Recipes() {
 
  function handlerFilterDiets (e) {
       dispatch(filterRecipesByDiet(e.target.value));
-    //  console.log(e.target.value)
+
   }
 
  function handlerSortScore(e){ 
       e.preventDefault();
      dispatch(orderRecipesByScore(e.target.value));
     order? setOrder(false) : setOrder(e.target.value)
-     console.log(e.target.value)
+    
   }
 
   function handlerSortName(e){ 
       e.preventDefault();
       dispatch(orderRecipesByName(e.target.value)); 
      order? setOrder(false) : setOrder(e.target.value)
-     console.log(e.target.value)
+   
   } 
 
 

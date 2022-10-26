@@ -11,7 +11,7 @@ const {API_KEY} = process.env;
           const dietsEach = dietsArrays.flat();
           const diets = [...new Set(dietsEach)];
           
-          // para guardar las dietas en la base de datos en caso de que no existan
+          
           diets.forEach(async (diet) => {
                await Diet.findOrCreate({
                     where: {

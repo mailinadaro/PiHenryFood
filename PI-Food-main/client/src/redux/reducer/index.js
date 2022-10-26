@@ -7,7 +7,7 @@ import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, 
     recipes: [],  
     allRecipes : [],
     recipe: {},  
-    createdRecipe: {},  
+    createdRecipe: [],  
 
 
    
@@ -21,9 +21,9 @@ import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, 
 
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
-        //// casos para pedidos al back
+  
         case GET_DIETS: //
-        //console.log(action.payload)
+     
             return {
                 ...state,
                 diets: action.payload,
@@ -35,7 +35,6 @@ export default function rootReducer(state = initialState, action) {
                 allRecipes: action.payload,
             }  
         case GET_RECIPES_NAME: 
-       // console.log(action.payload)
             return {
                 ...state,
                 recipes: action.payload,
@@ -48,14 +47,13 @@ export default function rootReducer(state = initialState, action) {
                 recipe: action.payload,
             }
         case CREATE_RECIPES: 
-       // console.log(action.payload)
             return {
                 ...state,
-                createdRecipe: [...state.createdRecipe, action.payload],
+                createdRecipe: [...state.createdRecipe, action.payload], 
             }
 
 
-        ///// CASOS SYNC
+      
         case FILTER_RECIPES_BY_DIET: 
          const filterDiet = state.recipes.filter((recipe)=> recipe.diets.find((e)=> e.name === action.payload))
             return {

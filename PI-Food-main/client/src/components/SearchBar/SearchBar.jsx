@@ -8,11 +8,10 @@ import './SearchBar.css';
 export default function SearchBar(){
     const dispatch = useDispatch();
     const [input, setInput] = useState("");
-    console.log(input)
+   
 
     function handleChange(e) {
         setInput(e.target.value); 
-        console.log(e.target.value)
     }
 
     function handleSubmit(e) {

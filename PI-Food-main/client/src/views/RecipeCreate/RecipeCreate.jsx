@@ -14,17 +14,13 @@ import {Link} from 'react-router-dom';
 export default function RecipeCreate() {
     const dispatch = useDispatch();
     const diets = useSelector((state) => state.diets);
-    const allRecipes = useSelector((state)=>state.allRecipes);
-    const alreadyExist =  allRecipes.find((recipe)=>recipe.name === input.name)
     const history = useHistory();
 
     function validate (input){
         let errors = {};
     
         switch (true) {
-            case alreadyExist :
-                errors.name = 'This recipe already created';
-                break;
+           
             case !input.name || input.name.length < 3  ||  !/^[a-zA-Z\s]+$/.test(input.name) :
                 errors.name = 'Name is required and must be alphanumeric';
                 break;
@@ -87,9 +83,8 @@ export default function RecipeCreate() {
 
    async function handleSubmit(e) {
         e.preventDefault(); 
-        setErrors(validate(input));
-         const errorSave = validate(input);
 
+        const errorSave = validate(input);
         if(Object.values(errorSave).length !== 0){
           alert('The recipe is not created, fill in the required fields!')
         }else{

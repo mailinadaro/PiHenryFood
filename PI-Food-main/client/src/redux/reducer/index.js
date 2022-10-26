@@ -61,10 +61,10 @@ export default function rootReducer(state = initialState, action) {
             }
             
         case ORDER_RECIPES_BY_SCORE: 
-             console.log(action.payload)
+             
            const orderByScore = action.payload === 'up' ? state.recipes.sort((a, b) => a.healthScore > b.healthScore ? -1 : b.healthScore > a.healthSocre ? 1 : 0) :
             state.recipes.sort((a, b)=> a.healthScore > b.healthScore ?  1 : b.healthScore > a.healthScore ? -1 : 0)
-           console.log(orderByScore)
+           
             return {
                 ...state,
                 recipes: orderByScore,
@@ -72,10 +72,10 @@ export default function rootReducer(state = initialState, action) {
                // currentPage: 1,
             } 
         case ORDER_RECIPES_BY_NAME: 
-            console.log(action.payload)
+          
             const orderByName = action.payload === 'asc' ? state.recipes.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0) :
             state.recipes.sort((a, b)=> a.name > b.name ?  -1 : b.name > a.name ? 1 : 0)
-            console.log(orderByName)
+           
             return {
                 ...state,
                 recipes: orderByName,  

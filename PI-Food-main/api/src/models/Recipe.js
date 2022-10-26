@@ -20,14 +20,12 @@ module.exports = (sequelize) => {
       allowNull: false, 
       validate : {
         notEmpty : true,
-       // isAlpha : true,
       },
-      //defaultValue: "No name", 
+    
     },
     summary: {
       type: DataTypes.TEXT,
       allowNull: false,
-      //defaultValue: "No summary",
       validate : {
         notEmpty: true,
         }
@@ -35,7 +33,6 @@ module.exports = (sequelize) => {
     healthScore: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      //defaultValue: 0,
       validate : {
         isNumeric : true, 
         min : 0, 
@@ -46,7 +43,6 @@ module.exports = (sequelize) => {
     steps: {
       type: DataTypes.TEXT,
       allowNull: false,
-      //defaultValue: "No steps",
       validate: {
         notEmpty: true,
     },

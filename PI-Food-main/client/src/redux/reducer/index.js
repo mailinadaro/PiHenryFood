@@ -2,19 +2,16 @@ import { GET_DIETS, GET_ALL_RECIPES, GET_RECIPES_NAME, GET_RECIPE, CREATE_RECIPE
 import { FILTER_RECIPES_BY_DIET, ORDER_RECIPES_BY_NAME, ORDER_RECIPES_BY_SCORE, CHANGE_PAGE, CLEAN_DETAIL } from '../actions/index.js';
 
  const initialState = {
-    ///// estados a partir de pedidos al back
+
     diets: [],  
     recipes: [],  
     allRecipes : [],
     recipe: {},  
     createdRecipe: [],  
 
-
    
-
-    // estado para el paginado 
-    recipesPerPage: 9, // se usa en el case CHANGE_PAGE
-    currentPage: 1, // se usa en el case CHANGE_PAGE
+    recipesPerPage: 9, 
+    currentPage: 1, 
 };
 
 
@@ -86,7 +83,7 @@ export default function rootReducer(state = initialState, action) {
                // currentPage: 1,
             } 
         case CHANGE_PAGE: 
-            //console.log(action.payload)
+           
             return {
                 ...state,
                 currentPage: Number(action.payload)? parseInt(action.payload) : action.payload === 'Next' ? (parseInt(state.currentPage) + 1 )  : (parseInt(state.currentPage) - 1 )

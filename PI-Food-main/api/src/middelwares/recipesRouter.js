@@ -7,12 +7,12 @@ const {deleteRecipe} = require('../controllers/deleteRecipe.js')
 
 const recipesRouter = Router();
 
-////// GET QUERY ////
+
 recipesRouter.get('/', async (req, res) => {
     try{
         const {name} = req.query;  
         const allRecipes = await getAllRecipes();
-        //console.log(allRecipes)
+      
         if(name){
             const recipesByName = allRecipes.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
             
@@ -30,11 +30,11 @@ recipesRouter.get('/', async (req, res) => {
 });
 
 
-///// POST ////
+
 recipesRouter.post('/', async (req, res) => {
     try{
         const {name, summary, healthScore, steps, createdInDB, diets} = req.body 
-        //validacion de datos recibidos
+       
         if(!name || !summary || name.length < 3 || summary.length < 3){
             res.status(400).send({error : 'Name and summary are required'});
         }
@@ -46,7 +46,7 @@ recipesRouter.post('/', async (req, res) => {
 })
 
 
-/// GET ID //////
+
 recipesRouter.get('/:id', async (req, res) => {
     const {id} = req.params;
 try{

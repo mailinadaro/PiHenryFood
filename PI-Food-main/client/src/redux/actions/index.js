@@ -1,20 +1,3 @@
-/////////////// VERSION DE PRUEBA REPASO HERNAN ///////////
-/* import axios from 'axios';
-export const GET_ALL_RECIPES = 'GET_ALL_RECIPES';
-
-
-
-export const getAllRecipes = () => {
-    return async function (dispatch){
-        const response = await axios.get('http://localhost:3001/recipes');
-        return dispatch({
-            type: GET_ALL_RECIPES,
-            payload: response.data
-        })
-    }
-}
-
- */
 
 import axios from 'axios';
 export const GET_DIETS = 'GET_DIETS';

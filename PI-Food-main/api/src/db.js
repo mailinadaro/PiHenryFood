@@ -6,19 +6,13 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-/////////////////////////////// CONEXION A LA BASE DE DATOS ///////////////////////////////
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 
 
-
-
-/////////////////////////////// MODELOS ///////////////////////////////
-// esta funcion me permite leer todos los archivos de la carpeta models y los importa automaticamente
-// y los exporta para poder usarlos en el resto de la app
-// esto se hace para no tener que importar cada modelo manualmente
 const basename = path.basename(__filename); 
 const modelDefiners = [];
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
@@ -36,7 +30,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 
-/////////////////////////////// RELACIONES ENTRE MODELOS ///////////////////////////////
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Recipe, Diet } = sequelize.models;

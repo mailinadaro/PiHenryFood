@@ -14,9 +14,7 @@ module.exports = (sequelize) => {
     name : {
         type: DataTypes.STRING,
         allowNull: false,
-        //defaultValue: "No name",
         validate : {
-          //isAlpha : true,
           notEmpty : true,
         }
   },
@@ -26,6 +24,3 @@ module.exports = (sequelize) => {
 };
 
 
-
-//Agregar validaciones, valores por defecto y restricciones a los campos de la tabla Recipe 
-//(campos que no pueden ser nulos, valores por defecto, valores únicos, etc.)

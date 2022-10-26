@@ -32,14 +32,3 @@ export default function SearchBar(){
 }
 
 
-//////////FLUJO EN EL COMPONENTE SEARCHBAR/////////////////////
-// 1. El usuario ingresa un valor en el input
-// 2. El valor ingresado se guarda en el estado de input 
-// 2.1. Se ejecuta la funcion handleChange que captura el valor ingresado en el input y lo guarda en el estado de input
-// 3. El usuario hace click en el boton de submit
-// 4. Se ejecuta la funcion handleSubmit
-// 5. Se ejecuta la funcion dispatch que trae las recetas por nombre
-// 6. Se ejecuta la funcion getRecipesName que trae las recetas por nombre pasado como parametro el valor del estado de input 
-// 7. Se ejecuta la funcion axios que trae las recetas por nombre
-
-//

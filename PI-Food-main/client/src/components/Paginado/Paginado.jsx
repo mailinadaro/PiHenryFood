@@ -14,13 +14,13 @@ export default function Paginado () {
     for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
         pageNumbers.push(i);
     }
-  // console.log(pageNumbers)
+  
    
     function handlerChangePage (e) {
         dispatch(changePage(e.target.value))
-        //console.log(e.target.value)
+       
     }
-   console.log(currentPage)
+   
     return (
         <div className='paginado'>
             <div className='button__container'>

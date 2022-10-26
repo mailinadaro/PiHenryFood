@@ -11,7 +11,7 @@ export default function RecipesDetail(props) {
   const dispatch = useDispatch();
   const id = props.match.params.id;
   const recipe = useSelector((state) => state.recipe);
-  //console.log(recipe);
+ 
 
   useEffect(() => {
     dispatch(getRecipe(id));

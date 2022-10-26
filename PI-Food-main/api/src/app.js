@@ -5,14 +5,11 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 require('./db.js');
 
-
-//////////////////////////// SERVER ///////////////////////////////////
 const server = express();
 
 server.name = 'API'; 
 
-////////////////////////// MIDDLEWARES /////////////////////////////////
-server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' })); //
+server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' })); 
 server.use(bodyParser.json({ limit: '50mb' })); 
 server.use(cookieParser());
 server.use(morgan('dev'));
@@ -26,13 +23,10 @@ server.use((req, res, next) => {
 
 
 
-
-///////////////////////////////// ROUTES ///////////////////////////////
 server.use('/', routes);
 
 
 
-////////// START SERVER //////////
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500; 

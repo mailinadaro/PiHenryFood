@@ -1,7 +1,12 @@
 # PiHenryFood
 Proyecto Individual para Henry 
 
+![Captura de pantalla (295)](https://user-images.githubusercontent.com/101735495/205678377-51aca972-b891-4eec-a9c9-809dc6799524.png)
+
+![Captura de pantalla (297)](https://user-images.githubusercontent.com/101735495/205678424-5acbac5e-672b-472c-bc62-03d15e22d9c5.png)
+
  ## Objetivos del Proyecto
+
 + Cree una aplicación con React, Redux, Node y Sequelize.
 + Afirmar y conectar los conceptos aprendidos.
 + Conocer las mejores prácticas.
@@ -25,7 +30,8 @@ A continuación se detallan los requisitos mínimos para la aprobación de cada 
 IMPORTANTE: No se permitio utilizar bibliotecas externas para aplicar estilos a la aplicación. Solo se pudo usar CSS con algunas de las opciones que vimos en clase (puro CSS, CSS Modules, StylesComponets)
 
 ## Tecnologías :
- React
- Redux
- Express
- Sequelize - Postgres
+- React
+- Redux
+- Express
+- Sequelize
+- Postgres

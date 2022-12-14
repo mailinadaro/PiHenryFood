@@ -54,10 +54,9 @@ const Recipe = (sequelize) => {
   },
   review: {
     type: DataTypes.STRING,
-    allowNull: false,
-    validate : {
-      notEmpty : true,
-    }
+  },
+  image : {
+    type: DataTypes.TEXT,
   }
 });
 };

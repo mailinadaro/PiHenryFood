@@ -17,6 +17,9 @@ const Diet = (sequelize) => {
           notEmpty : true,
         }
   },
+  description : {
+    type : DataTypes.TEXT,
+  }
   },
   {timestamps : false}
   );

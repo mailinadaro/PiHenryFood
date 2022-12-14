@@ -33,12 +33,12 @@ recipesRouter.get('/', async (req, res) => {
 
 recipesRouter.post('/', async (req, res) => {
     try{
-        const {name, summary, healthScore, steps, createdInDB, diets, review} = req.body 
+        const {name, summary, healthScore, steps, createdInDB, image, diets, review} = req.body 
        
         if(!name || !summary || name.length < 3 || summary.length < 3){
             res.status(400).send({error : 'Name and summary are required'});
         }
-        const newRecipe = await addNewRecipe(name, summary, healthScore, steps, createdInDB, diets, review);
+        const newRecipe = await addNewRecipe(name, summary, healthScore, steps, createdInDB, image, diets, review);
         res.status(200).send(newRecipe);
     }catch(error){
         res.status(400).send({error: error.message})

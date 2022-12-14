@@ -9,7 +9,7 @@ const typeDietsRouter = Router();
 typeDietsRouter.get('/', async (req, res) => {
     try{
         const allDiets = await getAllDiets() 
-
+        console.log(allDiets)
         if(allDiets){
             res.status(200).send(allDiets);
         } else {

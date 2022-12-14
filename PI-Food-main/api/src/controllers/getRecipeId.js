@@ -18,6 +18,11 @@ const getRecipeById = async function(id) {
               steps : recipeByIdAPI2.analyzedInstructions[0]?.steps.map((e)=> e.step), 
               image: recipeByIdAPI2.image,
               diets: recipeByIdAPI2.diets.map((element) => ({name:element})),
+              cookTime : recipeByIdAPI2.readyInMinutes,
+              likes : recipeByIdAPI2.aggregateLikes,
+              healthy: recipeByIdAPI2.veryHealthy,
+              ecocnomic: recipeByIdAPI2.cheap,
+              popular : recipeByIdAPI2.veryPopular,
             }
             return idAPI;
         } else {

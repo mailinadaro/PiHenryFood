@@ -1,7 +1,7 @@
 const {Recipe, Diet} = require('../db.js');
 
 
-const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, image, diets, review) => {
+const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, review, image, cookTime, economic, healthy, popular, diets) => {
     try{
         const newRecipe = await Recipe.create({
         name,
@@ -9,9 +9,15 @@ const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, imag
         healthScore,
         steps,
         createdInDB,
+        review,
         image,
-        review
+        cookTime,
+        economic, 
+        healthy, 
+        popular
         });
+        
+       
     
         if(diets){  
             const dietsDB = await Diet.findAll({ 
@@ -21,6 +27,7 @@ const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, imag
                 });
         await newRecipe.addDiet(dietsDB);
     }
+
     
     return newRecipe; 
 } catch(error){

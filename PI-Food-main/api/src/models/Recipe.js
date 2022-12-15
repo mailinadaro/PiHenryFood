@@ -57,8 +57,21 @@ const Recipe = (sequelize) => {
   },
   image : {
     type: DataTypes.TEXT,
+  },
+  cookTime: {
+    type : DataTypes.INTEGER,
+  },
+  economic :{
+    type: DataTypes.BOOLEAN,
+  },
+  healthy : {
+    type : DataTypes.BOOLEAN,
+  },
+  popular : {
+    type: DataTypes.BOOLEAN,
   }
-});
+},  
+);
 };
   
 module.exports = Recipe;

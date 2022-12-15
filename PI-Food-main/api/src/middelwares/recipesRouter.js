@@ -53,6 +53,7 @@ recipesRouter.get('/:id', async (req, res) => {
     const {id} = req.params;
 try{
     const recipeId = await getRecipeById(id)
+    console.log(recipeId ,"RECeTA POR ID EN BACK")
         if(recipeId){  
             res.status(200).send(recipeId); 
         } else {

@@ -14,7 +14,7 @@ const getRecipesApi = async ()=> {
             name: element.title,
             summary: element.summary,
             healthScore: element.healthScore,
-            steps : element.analyzedInstructions[0]?.steps.map((e)=> e.step), 
+            steps : element.analyzedInstructions?.[0]?.steps.map((e)=> e.step), 
             image: element.image,
             diets: element.diets.map((element) => ({name:element})),
             cookTime : element.readyInMinutes,

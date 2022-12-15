@@ -7,22 +7,25 @@ const {API_KEY} = process.env;
 const getRecipeById = async function(id) {
     try {
         if(id.toString().length < 8){
-            const recipeByIdAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
+            const recipeByIdAPI = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}&includeNutrition=true`);
             const recipeByIdAPI2 = recipeByIdAPI.data 
       
             const idAPI = {
               id: recipeByIdAPI2.id,
-              name: recipeByIdAPI2.title,
-              summary: recipeByIdAPI2.summary,
-              healthScore: recipeByIdAPI2.healthScore,
-              steps : recipeByIdAPI2.analyzedInstructions[0]?.steps.map((e)=> e.step), 
-              image: recipeByIdAPI2.image,
-              diets: recipeByIdAPI2.diets.map((element) => ({name:element})),
-              cookTime : recipeByIdAPI2.readyInMinutes,
-              likes : recipeByIdAPI2.aggregateLikes,
               healthy: recipeByIdAPI2.veryHealthy,
               ecocnomic: recipeByIdAPI2.cheap,
               popular : recipeByIdAPI2.veryPopular,
+              likes : recipeByIdAPI2.aggregateLikes,
+              name: recipeByIdAPI2.title,
+              healthScore: recipeByIdAPI2.healthScore,
+              ingredients : recipeByIdAPI2.extendedIngredients.map((e)=>e.image),
+              image: recipeByIdAPI2.image,
+              cookTime : recipeByIdAPI2.readyInMinutes,
+              summary: recipeByIdAPI2.summary, 
+              diets: recipeByIdAPI2.diets.map((element) => (element)),
+              steps : recipeByIdAPI2.analyzedInstructions[0]?.steps, 
+              nutrients : recipeByIdAPI2.nutrition.nutrients,
+              nutritionPercentages : recipeByIdAPI2.nutrition.caloricBreakdown,
             }
             return idAPI;
         } else {

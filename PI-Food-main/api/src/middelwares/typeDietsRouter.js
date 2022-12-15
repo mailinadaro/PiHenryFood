@@ -49,13 +49,17 @@ typeDietsRouter.put('/:id', async(req,res)=>{
     try {
         const {id} =req.params
         const {name} = req.body
+
+        if (id < 10) {
+            res.status(404).send(`This diets ${id} can't be updated `)
+        }
       
         const dietUpdated = await updateDiet(id, name)
        
         if(dietUpdated){
             res.status(200).send(dietUpdated)
         }else {
-            res.status(404).send({message: "The diet was not updated"})
+            res.status(404).send({message: `The diet with ${id} was not updated`})
         }
 
         
@@ -71,9 +75,9 @@ typeDietsRouter.delete('/:id', async(req,res)=>{
         const dietDeleted = await deleteDiet(id)
 
         if(dietDeleted){
-            res.status(200).send("The diet was deleted")
+            res.status(200).send(`The diet with ${id} was deleted`)
         }else {
-            res.status(404).send({message: "The diet was not deleted"})
+            res.status(404).send({message: `The diet with ${id} was not deleted`})
         }
         
     } catch (error) {

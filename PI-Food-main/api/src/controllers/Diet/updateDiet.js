@@ -7,13 +7,16 @@ const updateDiet = async function (id, name) {
     try {
         const dietId = await Diet.findByPk(id)
 
-        const putDiet = await dietId.update({
-            name,
-        })
-
-        // QUE PASA CON LAS RECETAS QUE AHORA LES CAMBIA ESTA RECETA???
-
-        return putDiet;
+            await dietId.setRecipes(null); 
+    
+            const putDiet = await dietId.update({
+                name,
+            })
+    
+           // await dietId.addRecipe(putDiet); 
+            // QUE PASA CON LAS RECETAS QUE AHORA LES CAMBIA ESTA RECETA???
+    
+            return putDiet;
 
     
     } catch (error) {

@@ -20,10 +20,18 @@ const {API_KEY} = process.env;
                })
           })
 
-          // TRAER LAS DIETAS CREADAS
-
-
-          return diets;
+          const dietsDb = await Diet.findAll()
+        
+          const newDiets= dietsDb.map((e)=>{
+                    return e.name
+          })
+      
+          const allDiets = [...diets, ...newDiets]
+          const allDiets2 = allDiets.flat()
+          const allDiets3 = [...new Set(allDiets2) ]
+             
+          return allDiets3;
+     
         } catch (error) {
             console.log(error)
         }

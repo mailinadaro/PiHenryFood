@@ -1,4 +1,4 @@
-const {Recipe, Diet} = require('../db.js');
+const {Recipe, Diet} = require('../../db.js');
 
 
 const addNewRecipe = async (name, summary, healthScore, steps, createdInDB, review, image, cookTime, economic, healthy, popular, diets) => {

@@ -1,10 +1,10 @@
 const {Router} = require('express');
 const {Recipe, Diet} = require('../db.js');
-const {getRecipesApi, getRecipesDb,  getAllRecipes } = require('../controllers/getRecipes.js');
-const { addNewRecipe } = require('../controllers/addNewRecipe.js');
-const { getRecipeByIdApi, getRecipeByIdDB, getRecipeById} = require('../controllers/getRecipeId.js');
- const { updateRecipe } = require('../controllers/updateRecipe.js');
- const {deleteRecipe} = require('../controllers/deleteRecipe')
+const {getRecipesApi, getRecipesDb,  getAllRecipes } = require('../controllers/Recipes/getRecipes.js');
+const { addNewRecipe } = require('../controllers/Recipes/addNewRecipe.js');
+const { getRecipeByIdApi, getRecipeByIdDB, getRecipeById} = require('../controllers/Recipes/getRecipeId.js');
+ const { updateRecipe } = require('../controllers/Recipes/updateRecipe.js');
+ const {deleteRecipe} = require('../controllers/Recipes/deleteRecipe')
 
 
 const recipesRouter = Router();
@@ -80,7 +80,7 @@ recipesRouter.put('/:id', async (req, res)=>{
         if(recipeUpdate){
             res.status(200).send(recipeUpdate)
         }else{
-            res.status(404).send({message: 'Recipe not updated'})
+            res.status(404).send({message: 'Recipe not updated'})// ESTAN BIEN LOS CODIGOS??
         }
     } catch (error) {
         res.status(400).send({error: error.message})
@@ -95,11 +95,10 @@ recipesRouter.delete('/:id', async (req, res)=>{
       
         const recipeDelete = await deleteRecipe(id)
         
-
         if(recipeDelete){
             res.status(200).send("The recipe was deleted")
         }else{
-            res.status(400).send({message: "The recipe wasn't deleted"})
+            res.status(400).send({message: "The recipe wasn't deleted"}) // ESTAN BIEN LO CODIGOS??
         }
         
     } catch (error) {

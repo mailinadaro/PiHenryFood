@@ -1,4 +1,4 @@
-const {Recipe, Diet} = require('../db.js');
+const {Recipe, Diet} = require('../../db.js');
 
 
 const deleteRecipe = async function (id) {

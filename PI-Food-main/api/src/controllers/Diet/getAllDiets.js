@@ -1,4 +1,4 @@
-const {Diet} = require('../db.js');
+const {Diet} = require('../../db.js');
 const axios = require('axios');
 const {API_KEY} = process.env;
 
@@ -19,6 +19,10 @@ const {API_KEY} = process.env;
                     }
                })
           })
+
+          // TRAER LAS DIETAS CREADAS
+
+
           return diets;
         } catch (error) {
             console.log(error)
